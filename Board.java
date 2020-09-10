@@ -1,9 +1,12 @@
 class Board{
-    private Player[][] board = new Player[3][3];
+    private final int l = 3;
+    private final int w = 3;
+
+    private final Player[][] board = new Player[l][w];
 
     public Board(){
-        for(int x=0 ; x<3 ; x++){
-            for(int y=0 ; y<3 ; y++){
+        for(int x=0 ; x<l ; x++){
+            for(int y=0 ; y<w ; y++){
                 board[x][y] = Player.NONE;
             }
         }
@@ -11,7 +14,7 @@ class Board{
     
     public String formatPlayer(Player player){
         if(player == Player.NONE){
-            return "NONE";
+            return "_";
         }else if(player == Player.O){
             return "O";
         }else if(player == Player.X){
@@ -22,43 +25,40 @@ class Board{
     }
     
     public void printBoard(){
-        for(int x=0 ; x<3 ; x++){
-            for(int y=0 ; y<3 ; y++){
-                System.out.printf("|%s", board[x][y]);
+        for(int x=0 ; x<l ; x++){
+            for(int y=0 ; y<w ; y++){
+                System.out.printf("|%s", formatPlayer(getSquare(x, y)));
             }
             System.out.println("|");
         }
     }
     
     public Player getSquare(int x, int y){
-        if(x < 3 && y < 3 && y >= 0 && x >= 0){
+        if(x < w && y < l && y >= 0 && x >= 0){
             return board[x][y];
         }
         return null;
     }
     
     public void setSquare(int x, int y, Player player){
-        if(x < 3 && y < 3 && y >= 0 && x >= 0){
+        if(x < w && y < l && y >= 0 && x >= 0){
             board[x][y] = player;
         }
     }
     
     public boolean isOccupied(int x, int y){
-        if(getSquare(x, y) == Player.NONE){
-            return false;
-        }
-        return true;
+        return getSquare(x, y) != Player.NONE;
     }
     
     public Player getWinner(){
-        for(int x=0 ; x<3 ; x++){
+        for(int x=0 ; x<l ; x++){
             if(getSquare(x, 0) == getSquare(x, 1) && getSquare(x, 1) == getSquare(x, 2)){
                 return getSquare(x, 0);
             }
         }
         
-        for(int y=0 ; y<3 ; y++){
-            if(getSquare(1, y) == getSquare(1, y) && getSquare(1, y) == getSquare(2, y)){
+        for(int y=0 ; y<w ; y++){
+            if(getSquare(0, y) == getSquare(1, y) && getSquare(1, y) == getSquare(2, y)){
                 return getSquare(0, y);
             }
         }
@@ -75,9 +75,6 @@ class Board{
     }
     
     public boolean isWon(){
-        if(getWinner() != Player.NONE){
-            return true;
-        }
-        return false;
+        return getWinner() != Player.NONE;
     }
 }

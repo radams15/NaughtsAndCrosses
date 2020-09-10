@@ -3,7 +3,7 @@ import java.lang.Integer;
 
 class Main{
     
-    public Main(String args[]){
+    public Main(){
     
         Scanner scanner = new Scanner(System.in);
         
@@ -27,14 +27,10 @@ class Main{
                 continue;
             }
             
-            int points[] = new int[2];
-            
-            try{
-                for(int i=0 ; i<2 ; i++){
-                    points[i] = Integer.parseInt(split[i]);
-                }
-            }catch(Exception e){
-                continue;
+            int[] points = new int[2];
+
+            for(int i=0 ; i<split.length ; i++){
+                points[i] = Integer.parseInt(split[i]); // try to parse each of the split variable into 2 int points
             }
             
             if(board.isOccupied(points[0], points[1])){
@@ -51,13 +47,13 @@ class Main{
             }
         }
         
-        
         board.printBoard();
+
         System.out.printf("Winner Is: %s%n", board.formatPlayer(board.getWinner()));
         
     }
 
-    public static void main(String args[]){
-        new Main(args);
+    public static void main(String[] args){
+        new Main();
     }
 }
