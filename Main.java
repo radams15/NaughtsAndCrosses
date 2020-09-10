@@ -4,10 +4,10 @@ import java.lang.Integer;
 class Main{
     
     public Main(){
-    
-        Scanner scanner = new Scanner(System.in);
-        
+
         Board board = new Board();
+
+        /*Scanner scanner = new Scanner(System.in);
         
         Player player = Player.X;
         
@@ -49,8 +49,9 @@ class Main{
         
         board.printBoard();
 
-        System.out.printf("Winner Is: %s%n", board.formatPlayer(board.getWinner()));
-        
+        System.out.printf("Winner Is: %s%n", board.formatPlayer(board.getWinner()));*/
+
+        Gui gui = new Gui(board);
     }
 
     public static void main(String[] args){
